@@ -1,30 +1,33 @@
 import { useState } from 'react';
 import { Search } from 'lucide-react';
-import { componentLibrary } from '../../data/componentDatabase';
+import { authenticVisaComponents } from '../../data/authenticVisaComponents.js';
 import './ComponentLibraryView.css';
 
-export function ComponentLibraryView() {
+export function ComponentLibraryView({ onUseComponent }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
 
-  const categories = ['all', ...componentLibrary.map(cat => cat.category)];
+  const categories = ['all', ...new Set(authenticVisaComponents.map(comp => comp.category))];
 
-  const filteredComponents = componentLibrary
-    .filter(category => selectedCategory === 'all' || category.category === selectedCategory)
+  const filteredComponents = authenticVisaComponents.filter(comp => {
+    const matchesCategory = selectedCategory === 'all' || comp.category === selectedCategory;
+    const matchesSearch = comp.name.toLowerCase().includes(searchTerm.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
+  const groupedComponents = categories
+    .filter(cat => cat !== 'all')
     .map(category => ({
-      ...category,
-      components: category.components.filter(comp =>
-        comp.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        comp.description.toLowerCase().includes(searchTerm.toLowerCase())
-      )
+      category,
+      components: filteredComponents.filter(comp => comp.category === category)
     }))
-    .filter(category => category.components.length > 0);
+    .filter(group => group.components.length > 0);
 
   return (
     <div className="component-library-view">
       <div className="library-header">
-        <h2>NOVA Component Library</h2>
-        <p>Browse and explore all available NOVA components</p>
+        <h2>Visa Product Design System Components</h2>
+        <p>Authentic components from <a href="https://design.visa.com/components/" target="_blank" rel="noopener noreferrer" className="v-link">design.visa.com</a></p>
       </div>
 
       <div className="library-controls">
@@ -53,15 +56,20 @@ export function ComponentLibraryView() {
       </div>
 
       <div className="components-grid">
-        {filteredComponents.map((category, catIndex) => (
+        {groupedComponents.map((group, catIndex) => (
           <div key={catIndex} className="category-section">
-            <h3 className="category-title">{category.category}</h3>
+            <h3 className="category-title">{group.category}</h3>
             <div className="components-list">
-              {category.components.map((component, compIndex) => (
-                <div key={compIndex} className="component-card">
+              {group.components.map((component) => (
+                <div key={component.id} className="component-card">
                   <h4>{component.name}</h4>
-                  <p>{component.description}</p>
-                  <button className="use-component-btn">
+                  <div className="component-preview">
+                    <pre><code>{component.code}</code></pre>
+                  </div>
+                  <button 
+                    className="use-component-btn"
+                    onClick={() => onUseComponent(component)}
+                  >
                     Use This Component
                   </button>
                 </div>
@@ -71,7 +79,7 @@ export function ComponentLibraryView() {
         ))}
       </div>
 
-      {filteredComponents.length === 0 && (
+      {groupedComponents.length === 0 && (
         <div className="empty-state">
           <p>No components found matching your search.</p>
         </div>

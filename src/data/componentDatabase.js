@@ -1,6 +1,4 @@
-import type { ComponentSuggestion } from '../types/components';
-
-export const componentDatabase: Record<string, ComponentSuggestion> = {
+export const componentDatabase = {
   login: {
     components: [
       { name: 'FormContainer', purpose: 'Form wrapper with validation', props: 'responsive, onSubmit, children' },
@@ -604,6 +602,69 @@ function UserProfile() {
 
 export default UserProfile;`,
     preview: 'profile'
+  },
+  // Simple component patterns
+  simpleButton: {
+    components: [
+      { name: 'Button', purpose: 'Simple button component', props: 'variant, onClick, children' }
+    ],
+    code: `<button className="btn btn-primary">Click Me</button>`,
+    preview: 'button'
+  },
+  simpleInput: {
+    components: [
+      { name: 'Input', purpose: 'Simple text input', props: 'type, placeholder, value, onChange' }
+    ],
+    code: `<div className="form-group">
+  <label htmlFor="text-input">Label</label>
+  <input type="text" id="text-input" className="input" placeholder="Enter text..." />
+</div>`,
+    preview: 'input'
+  },
+  simpleCard: {
+    components: [
+      { name: 'Card', purpose: 'Simple card container', props: 'children' }
+    ],
+    code: `<div className="card">
+  <h3>Card Title</h3>
+  <p>Card content goes here. This is a simple card component.</p>
+</div>`,
+    preview: 'card'
+  },
+  contactForm: {
+    components: [
+      { name: 'Form', purpose: 'Contact form', props: 'onSubmit' },
+      { name: 'Input', purpose: 'Form inputs', props: 'type, label, required' },
+      { name: 'Textarea', purpose: 'Message textarea', props: 'label, rows' },
+      { name: 'Button', purpose: 'Submit button', props: 'type, children' }
+    ],
+    code: `<form className="form">
+  <div className="form-group">
+    <label htmlFor="name">Name</label>
+    <input type="text" id="name" className="input" required />
+  </div>
+  <div className="form-group">
+    <label htmlFor="email">Email</label>
+    <input type="email" id="email" className="input" required />
+  </div>
+  <div className="form-group">
+    <label htmlFor="message">Message</label>
+    <textarea id="message" className="textarea" rows="4" required></textarea>
+  </div>
+  <button type="submit" className="btn btn-primary">Send Message</button>
+</form>`,
+    preview: 'form'
+  },
+  simpleList: {
+    components: [
+      { name: 'List', purpose: 'Simple list component', props: 'items, ordered' }
+    ],
+    code: `<ul className="list">
+  <li>First item</li>
+  <li>Second item</li>
+  <li>Third item</li>
+</ul>`,
+    preview: 'list'
   }
 };
 

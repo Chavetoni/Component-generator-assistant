@@ -6,16 +6,21 @@ import { DashboardView } from './components/views/DashboardView';
 import { ComponentLibraryView } from './components/views/ComponentLibraryView';
 import { MyComponentsView } from './components/views/MyComponentsView';
 import './App.css';
+import './styles/visaComponents.css';
 
 function App() {
   const [activeView, setActiveView] = useState('dashboard');
+  const [selectedComponent, setSelectedComponent] = useState(null);
 
   const renderView = () => {
     switch (activeView) {
       case 'dashboard':
-        return <DashboardView />;
+        return <DashboardView selectedComponent={selectedComponent} />;
       case 'components':
-        return <ComponentLibraryView />;
+        return <ComponentLibraryView onUseComponent={(component) => {
+          setSelectedComponent({ code: component.code, preview: component.preview });
+          setActiveView('dashboard');
+        }} />;
       case 'my-components':
         return <MyComponentsView />;
       default:

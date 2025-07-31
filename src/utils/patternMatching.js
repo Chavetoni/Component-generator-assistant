@@ -1,11 +1,53 @@
-import { componentDatabase } from '../data/componentDatabase';
-import type { ComponentSuggestion } from '../types/components';
+import { componentDatabase } from '../data/componentDatabase.js';
+import { authenticVisaComponents } from '../data/authenticVisaComponents.js';
 
-export function matchPattern(input: string): ComponentSuggestion | null {
+export function matchPattern(input) {
   const normalizedInput = input.toLowerCase().trim();
   
-  // Direct pattern matching
-  const patterns: Record<string, string[]> = {
+  // First check for authentic Visa component matches
+  const visaPatterns = {
+    'visa-button-primary': ['primary button', 'main button', 'action button'],
+    'visa-button-secondary': ['secondary button', 'outline button'],
+    'visa-button-large': ['large button', 'big button'],
+    'visa-input-text': ['text input', 'input field', 'text field'],
+    'visa-input-email': ['email input', 'email field'],
+    'visa-input-password': ['password input', 'password field'],
+    'visa-textarea': ['textarea', 'text area', 'multiline'],
+    'visa-checkbox': ['checkbox', 'check box', 'toggle'],
+    'visa-checkbox-group': ['checkbox group', 'multiple checkboxes'],
+    'visa-radio-group': ['radio button', 'radio input', 'radio group'],
+    'visa-accordion': ['accordion', 'collapsible', 'expandable'],
+    'visa-progress-bar': ['progress bar', 'progress', 'loading'],
+    'visa-progress-determinate': ['progress with value', 'determinate progress'],
+    'visa-alert-info': ['info alert', 'information'],
+    'visa-alert-success': ['success alert', 'success message'],
+    'visa-alert-warning': ['warning alert', 'warning message'],
+    'visa-alert-error': ['error alert', 'error message'],
+    'visa-avatar': ['avatar', 'profile picture', 'user icon'],
+    'visa-avatar-small': ['small avatar', 'tiny avatar'],
+    'visa-avatar-large': ['large avatar', 'big avatar'],
+    'visa-breadcrumb': ['breadcrumb', 'navigation trail'],
+    'visa-tabs': ['tabs', 'tab navigation'],
+    'visa-login-form': ['login form', 'sign in form', 'authentication'],
+    'visa-contact-form': ['contact form', 'contact us', 'feedback form']
+  };
+
+  // Check for authentic Visa component matches first
+  for (const [componentId, keywords] of Object.entries(visaPatterns)) {
+    if (keywords.some(keyword => normalizedInput.includes(keyword))) {
+      const component = authenticVisaComponents.find(c => c.id === componentId);
+      if (component) {
+        return {
+          components: [{ name: component.name, purpose: component.description, props: '' }],
+          code: component.code,
+          preview: component.preview
+        };
+      }
+    }
+  }
+
+  // Fallback to original pattern matching
+  const patterns = {
     login: ['login', 'signin', 'sign in', 'authenticate', 'auth form'],
     navigation: ['nav', 'menu', 'navigation', 'navbar', 'sidebar'],
     button: ['button', 'btn', 'action', 'submit'],
@@ -71,10 +113,10 @@ export default CustomForm;`,
   return null;
 }
 
-export function getQuickActions(pattern: string): string[] {
+export function getQuickActions(pattern) {
   const baseActions = ['+ Add validation', '+ Add loading state', '+ Make responsive'];
   
-  const patternSpecificActions: Record<string, string[]> = {
+  const patternSpecificActions = {
     login: ['+ Add forgot password', '+ Add social login', '+ Add captcha'],
     navigation: ['+ Add dropdown', '+ Add search', '+ Add user menu'],
     button: ['+ Add icon', '+ Change size', '+ Add tooltip'],

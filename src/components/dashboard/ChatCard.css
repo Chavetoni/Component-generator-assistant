@@ -2,6 +2,8 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  max-height: 100%;
+  overflow: hidden;
 }
 
 .chat-header {
@@ -9,12 +11,18 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
+  flex-shrink: 0;
 }
 
 .chat-header h3 {
   font-size: 1.125rem;
   font-weight: 600;
   margin: 0;
+  color: var(--visa-blue);
+}
+
+.dark .chat-header h3 {
+  color: var(--visa-gold);
 }
 
 .reset-btn {
@@ -37,11 +45,20 @@
 .chat-messages {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   background-color: var(--bg-tertiary);
   border-radius: 0.5rem;
   padding: 1rem;
   margin-bottom: 1rem;
-  min-height: 300px;
+  min-height: 0; /* Allow shrinking */
+  max-height: 100%;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+/* Ensure messages container doesn't interfere with scrolling */
+.chat-messages:focus {
+  outline: none;
 }
 
 .message {
@@ -63,12 +80,14 @@
 }
 
 .message.user {
-  background-color: #dbeafe;
+  background-color: var(--visa-blue);
+  color: white;
   margin-left: 2rem;
 }
 
 .dark .message.user {
-  background-color: #1e3a8a;
+  background-color: var(--visa-blue);
+  color: white;
 }
 
 .message.assistant {
@@ -90,10 +109,12 @@
 .chat-input-form {
   display: flex;
   gap: 0.5rem;
+  flex-shrink: 0;
 }
 
 .chat-input {
   flex: 1;
+  min-width: 0;
 }
 
 .quick-actions {
@@ -117,4 +138,52 @@
   background-color: var(--border-color);
   border-color: var(--visa-blue);
   color: var(--visa-blue);
+}
+
+/* Modification Actions */
+.modification-actions {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: var(--bg-tertiary);
+  border-radius: 0.5rem;
+  border-left: 4px solid var(--visa-blue);
+}
+
+.dark .modification-actions {
+  border-left-color: var(--visa-gold);
+}
+
+.actions-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.modification-btn {
+  background-color: var(--visa-blue);
+  color: white;
+  border-color: var(--visa-blue);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.dark .modification-btn {
+  background-color: var(--visa-gold);
+  border-color: var(--visa-gold);
+  color: var(--bg-primary);
+}
+
+.modification-btn:hover {
+  background-color: var(--visa-blue);
+  border-color: var(--visa-blue);
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dark .modification-btn:hover {
+  background-color: var(--visa-gold);
+  border-color: var(--visa-gold);
+  opacity: 0.9;
 }

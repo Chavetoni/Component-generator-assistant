@@ -1,12 +1,17 @@
 import { Card } from '../ui/Card';
 import './PreviewCard.css';
 
-interface PreviewCardProps {
-  preview: string | null;
-}
-
-export function PreviewCard({ preview }: PreviewCardProps) {
+export function PreviewCard({ preview, code }) {
   const renderPreview = () => {
+    // If we have code, render it directly with Visa styles
+    if (code && code.trim()) {
+      return (
+        <div className="preview-content">
+          <div className="dynamic-preview" dangerouslySetInnerHTML={{ __html: code }} />
+        </div>
+      );
+    }
+
     if (!preview) {
       return (
         <div className="preview-empty">
@@ -283,6 +288,283 @@ export function PreviewCard({ preview }: PreviewCardProps) {
                 <button className="preview-button primary">Edit Profile</button>
                 <button className="preview-button outline">View Activity</button>
                 <button className="preview-button outline">Settings</button>
+              </div>
+            </div>
+          </div>
+        );
+      
+      case 'input':
+        return (
+          <div className="preview-content">
+            <div className="preview-form">
+              <div className="form-group">
+                <label>Label</label>
+                <input type="text" className="preview-input" placeholder="Enter text..." />
+              </div>
+            </div>
+          </div>
+        );
+      
+      case 'select':
+        return (
+          <div className="preview-content">
+            <div className="preview-form">
+              <div className="form-group">
+                <label>Choose an option</label>
+                <select className="preview-select">
+                  <option>Select...</option>
+                  <option>Option 1</option>
+                  <option>Option 2</option>
+                  <option>Option 3</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        );
+      
+      case 'checkbox':
+        return (
+          <div className="preview-content">
+            <div className="preview-form">
+              <label className="checkbox-label">
+                <input type="checkbox" />
+                <span>I agree to the terms</span>
+              </label>
+            </div>
+          </div>
+        );
+      
+      case 'list':
+        return (
+          <div className="preview-content">
+            <ul className="preview-list">
+              <li>First item</li>
+              <li>Second item</li>
+              <li>Third item</li>
+            </ul>
+          </div>
+        );
+      
+      case 'form':
+        return (
+          <div className="preview-content">
+            <form className="preview-form">
+              <div className="form-group">
+                <label>Name</label>
+                <input type="text" className="preview-input" />
+              </div>
+              <div className="form-group">
+                <label>Email</label>
+                <input type="email" className="preview-input" />
+              </div>
+              <div className="form-group">
+                <label>Message</label>
+                <textarea className="preview-textarea" rows={4}></textarea>
+              </div>
+              <button className="preview-button primary">Send Message</button>
+            </form>
+          </div>
+        );
+      
+      case 'layout':
+        return (
+          <div className="preview-content">
+            <div className="preview-grid">
+              <div className="grid-column">
+                <h4>Left Column</h4>
+                <p>Content for the left side.</p>
+              </div>
+              <div className="grid-column">
+                <h4>Right Column</h4>
+                <p>Content for the right side.</p>
+              </div>
+            </div>
+          </div>
+        );
+      
+      case 'hero':
+        return (
+          <div className="preview-content">
+            <section className="preview-hero">
+              <h1>Welcome to Our Site</h1>
+              <p>Discover amazing features and services</p>
+              <button className="preview-button primary large">Get Started</button>
+            </section>
+          </div>
+        );
+      
+      case 'accordion':
+        return (
+          <div className="preview-content">
+            <details className="v-accordion">
+              <summary className="v-button v-button-secondary v-button-large v-accordion-heading">
+                <span>▶</span>
+                Accordion Title
+              </summary>
+              <div className="v-accordion-panel">
+                <p>This is the accordion content that expands when clicked.</p>
+              </div>
+            </details>
+          </div>
+        );
+      
+      case 'radio':
+        return (
+          <div className="preview-content">
+            <div className="v-flex v-flex-col v-gap-4">
+              <div className="v-flex v-align-items-center v-gap-2">
+                <input className="v-radio" id="radio-1" name="radio-group" type="radio" defaultChecked />
+                <label className="v-label" htmlFor="radio-1">Option 1</label>
+              </div>
+              <div className="v-flex v-align-items-center v-gap-2">
+                <input className="v-radio" id="radio-2" name="radio-group" type="radio" />
+                <label className="v-label" htmlFor="radio-2">Option 2</label>
+              </div>
+            </div>
+          </div>
+        );
+      
+      case 'textarea':
+        return (
+          <div className="preview-content">
+            <div className="v-flex v-flex-col v-gap-4">
+              <label className="v-label" htmlFor="textarea-preview">Message</label>
+              <div className="v-input-container v-surface">
+                <textarea className="v-input" id="textarea-preview" rows={4} placeholder="Enter your message..."></textarea>
+              </div>
+            </div>
+          </div>
+        );
+      
+      case 'avatar':
+        return (
+          <div className="preview-content">
+            <div className="v-flex v-align-items-center v-gap-4">
+              <span className="v-avatar v-avatar-small">JS</span>
+              <span className="v-avatar">AM</span>
+              <span className="v-avatar v-avatar-large">SJ</span>
+            </div>
+          </div>
+        );
+      
+      case 'progress':
+        return (
+          <div className="preview-content">
+            <div className="v-flex v-flex-col v-gap-4">
+              <div>
+                <progress className="v-progress v-progress-bar" value="60" max="100"></progress>
+                <div className="v-progress-label">60% complete</div>
+              </div>
+              <div>
+                <progress className="v-progress v-progress-bar"></progress>
+                <div className="v-progress-label">Loading...</div>
+              </div>
+            </div>
+          </div>
+        );
+      
+      case 'spinner':
+        return (
+          <div className="preview-content">
+            <div className="v-spinner">
+              <svg className="v-spinner-svg" viewBox="0 0 50 50">
+                <circle className="v-spinner-circle" cx="25" cy="25" r="20" fill="none" strokeWidth="5"></circle>
+              </svg>
+            </div>
+          </div>
+        );
+      
+      case 'toast':
+        return (
+          <div className="preview-content">
+            <div className="v-toast v-surface">
+              <div className="v-toast-content">
+                <p className="v-typography-body-medium">Changes saved successfully</p>
+              </div>
+              <button className="v-button v-button-tertiary v-button-icon">×</button>
+            </div>
+          </div>
+        );
+      
+      case 'breadcrumb':
+        return (
+          <div className="preview-content">
+            <nav className="v-breadcrumb">
+              <ol className="v-breadcrumb-list">
+                <li className="v-breadcrumb-item">
+                  <a href="#" className="v-link">Home</a>
+                  <span className="v-breadcrumb-separator">›</span>
+                </li>
+                <li className="v-breadcrumb-item">
+                  <a href="#" className="v-link">Products</a>
+                  <span className="v-breadcrumb-separator">›</span>
+                </li>
+                <li className="v-breadcrumb-item">
+                  <span>Details</span>
+                </li>
+              </ol>
+            </nav>
+          </div>
+        );
+      
+      case 'tabs':
+        return (
+          <div className="preview-content">
+            <div className="v-tabs">
+              <div className="v-tabs-list">
+                <button className="v-tab v-tab-active">Tab 1</button>
+                <button className="v-tab">Tab 2</button>
+                <button className="v-tab">Tab 3</button>
+              </div>
+              <div className="v-tab-panel">
+                <p className="v-typography-body-medium">Content for tab 1</p>
+              </div>
+            </div>
+          </div>
+        );
+      
+      case 'pagination':
+        return (
+          <div className="preview-content">
+            <nav className="v-pagination">
+              <button className="v-button v-button-secondary v-button-icon">‹</button>
+              <button className="v-button v-button-secondary">1</button>
+              <button className="v-button v-button-tertiary">2</button>
+              <button className="v-button v-button-tertiary">3</button>
+              <span className="v-pagination-ellipsis">...</span>
+              <button className="v-button v-button-tertiary">10</button>
+              <button className="v-button v-button-secondary v-button-icon">›</button>
+            </nav>
+          </div>
+        );
+      
+      case 'badge':
+        return (
+          <div className="preview-content">
+            <div className="v-flex v-align-items-center v-gap-4">
+              <span className="v-badge">New</span>
+              <span className="v-badge v-badge-count">99+</span>
+            </div>
+          </div>
+        );
+      
+      case 'tag':
+        return (
+          <div className="preview-content">
+            <div className="v-tag">
+              <span className="v-tag-label">Category</span>
+              <button className="v-tag-remove">×</button>
+            </div>
+          </div>
+        );
+      
+      case 'tooltip':
+        return (
+          <div className="preview-content">
+            <div className="v-tooltip-container">
+              <button className="v-button">Hover me</button>
+              <div className="v-tooltip">
+                <div className="v-tooltip-content">This is a helpful tooltip</div>
               </div>
             </div>
           </div>

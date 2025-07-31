@@ -38,7 +38,7 @@
 .search-input {
   padding-left: 3rem;
   width: 100%;
-  max-width: 400px;
+  max-width: 350px;
 }
 
 .category-filters {
@@ -66,6 +66,12 @@
   background-color: var(--visa-blue);
   color: white;
   border-color: var(--visa-blue);
+}
+
+.dark .category-btn {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  border-color: var(--border-color);
 }
 
 .dark .category-btn.active {
@@ -114,7 +120,7 @@
 .component-card h4 {
   font-size: 1.125rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   color: var(--visa-blue);
 }
 
@@ -122,11 +128,23 @@
   color: var(--visa-gold);
 }
 
-.component-card p {
-  color: var(--text-secondary);
-  font-size: 0.875rem;
+.component-preview {
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.375rem;
+  padding: 1rem;
   margin-bottom: 1rem;
+  overflow-x: auto;
+}
+
+.component-preview pre {
+  margin: 0;
+  font-size: 0.75rem;
   line-height: 1.5;
+}
+
+.component-preview code {
+  color: var(--text-primary);
 }
 
 .use-component-btn {
@@ -143,7 +161,8 @@
 }
 
 .use-component-btn:hover {
-  background-color: #141959;
+  background-color: var(--visa-blue);
+  opacity: 0.9;
 }
 
 .empty-state {

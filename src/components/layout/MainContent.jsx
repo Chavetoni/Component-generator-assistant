@@ -1,11 +1,7 @@
 import React from 'react';
 import './MainContent.css';
 
-interface MainContentProps {
-  children: React.ReactNode;
-}
-
-export function MainContent({ children }: MainContentProps) {
+export function MainContent({ children }) {
   return (
     <main className="main-content">
       {children}

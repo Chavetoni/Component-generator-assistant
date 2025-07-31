@@ -56,9 +56,34 @@
   color: white;
 }
 
+.saved-component-item.active h4,
+.saved-component-item.active p,
+.saved-component-item.active .delete-btn {
+  color: white !important;
+}
+
 .dark .saved-component-item.active {
   background-color: var(--visa-gold);
   color: var(--bg-primary);
+}
+
+.dark .saved-component-item.active h4,
+.dark .saved-component-item.active p,
+.dark .saved-component-item.active .delete-btn {
+  color: var(--bg-primary) !important;
+}
+
+/* Make component-info section visible when card is active */
+.saved-component-item.active .component-info {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.75rem;
+  border-radius: 0.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .saved-component-item.active .component-info {
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 .component-info h4 {
@@ -77,25 +102,11 @@
   overflow: hidden;
 }
 
-.saved-component-item.active .component-info p {
-  color: inherit;
-  opacity: 0.9;
-}
-
-.component-date {
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-}
-
-.saved-component-item.active .component-date {
-  color: inherit;
-  opacity: 0.8;
-}
 
 .delete-btn {
   background: none;
   border: none;
-  color: #ef4444;
+  color: var(--text-secondary);
   cursor: pointer;
   padding: 0.25rem;
   border-radius: 0.25rem;
@@ -103,11 +114,18 @@
 }
 
 .delete-btn:hover {
-  background-color: #fee2e2;
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
 }
 
-.dark .delete-btn:hover {
-  background-color: #991b1b;
+.saved-component-item.active .delete-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: white !important;
+}
+
+.dark .saved-component-item.active .delete-btn:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: var(--bg-primary) !important;
 }
 
 .component-preview {

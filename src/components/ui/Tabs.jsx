@@ -1,21 +1,9 @@
 import React, { useState } from 'react';
 
-interface Tab {
-  id: string;
-  label: string;
-  content: React.ReactNode;
-}
-
-interface TabsProps {
-  tabs: Tab[];
-  defaultTab?: string;
-  onTabChange?: (tabId: string) => void;
-}
-
-export function Tabs({ tabs, defaultTab, onTabChange }: TabsProps) {
+export function Tabs({ tabs, defaultTab, onTabChange }) {
   const [activeTab, setActiveTab] = useState(defaultTab || tabs[0]?.id);
 
-  const handleTabClick = (tabId: string) => {
+  const handleTabClick = (tabId) => {
     setActiveTab(tabId);
     onTabChange?.(tabId);
   };

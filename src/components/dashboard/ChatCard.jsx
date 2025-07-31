@@ -2,24 +2,17 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Send } from 'lucide-react';
 import { Card } from '../ui/Card';
 import { Button } from '../ui/Button';
-import type { ChatMessage } from '../../types/components';
 import './ChatCard.css';
 
-interface ChatCardProps {
-  messages: ChatMessage[];
-  onSendMessage: (message: string) => void;
-  onReset: () => void;
-}
-
-export function ChatCard({ messages, onSendMessage, onReset }: ChatCardProps) {
+export function ChatCard({ messages, onSendMessage, onReset }) {
   const [input, setInput] = useState('');
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesEndRef = useRef(null);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (input.trim()) {
       onSendMessage(input.trim());
@@ -27,36 +20,39 @@ export function ChatCard({ messages, onSendMessage, onReset }: ChatCardProps) {
     }
   };
 
-  const handleQuickAction = (action: string) => {
+  const handleQuickAction = (action) => {
     onSendMessage(action);
   };
 
-  const renderMessageContent = (message: ChatMessage) => {
+  const renderMessageContent = (message) => {
     if (message.isTyping) {
       return <p className="typing-indicator">{message.content}</p>;
     }
 
-    // Parse quick actions from message
-    const quickActionRegex = /Quick modifications available: (.+)$/;
-    const match = message.content.match(quickActionRegex);
+    // Parse modification actions from message
+    const modificationRegex = /Available modifications: (.+)$/;
+    const match = message.content.match(modificationRegex);
     
     if (match && message.sender === 'assistant') {
-      const mainContent = message.content.replace(quickActionRegex, '');
+      const mainContent = message.content.replace(modificationRegex, '');
       const actions = match[1].split(', ');
       
       return (
         <>
           <div dangerouslySetInnerHTML={{ __html: formatMessage(mainContent) }} />
-          <div className="quick-actions">
-            {actions.map((action, index) => (
-              <button
-                key={index}
-                className="quick-action-btn"
-                onClick={() => handleQuickAction(action)}
-              >
-                {action}
-              </button>
-            ))}
+          <div className="modification-actions">
+            <div className="actions-label">Try these modifications:</div>
+            <div className="quick-actions">
+              {actions.map((action, index) => (
+                <button
+                  key={index}
+                  className="quick-action-btn modification-btn"
+                  onClick={() => handleQuickAction(action)}
+                >
+                  {action}
+                </button>
+              ))}
+            </div>
           </div>
         </>
       );
@@ -65,7 +61,7 @@ export function ChatCard({ messages, onSendMessage, onReset }: ChatCardProps) {
     return <div dangerouslySetInnerHTML={{ __html: formatMessage(message.content) }} />;
   };
 
-  const formatMessage = (content: string) => {
+  const formatMessage = (content) => {
     return content
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
       .replace(/\n/g, '<br />');

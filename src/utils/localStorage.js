@@ -1,8 +1,6 @@
-import type { SavedComponent } from '../types/components';
-
 const STORAGE_KEY = 'nova_saved_components';
 
-export function getSavedComponents(): SavedComponent[] {
+export function getSavedComponents() {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
     return saved ? JSON.parse(saved) : [];
@@ -12,9 +10,9 @@ export function getSavedComponents(): SavedComponent[] {
   }
 }
 
-export function saveComponent(component: Omit<SavedComponent, 'id' | 'createdAt'>): SavedComponent {
+export function saveComponent(component) {
   const savedComponents = getSavedComponents();
-  const newComponent: SavedComponent = {
+  const newComponent = {
     ...component,
     id: Date.now().toString(),
     createdAt: new Date()
@@ -26,13 +24,13 @@ export function saveComponent(component: Omit<SavedComponent, 'id' | 'createdAt'
   return newComponent;
 }
 
-export function deleteComponent(id: string): void {
+export function deleteComponent(id) {
   const savedComponents = getSavedComponents();
   const filtered = savedComponents.filter(comp => comp.id !== id);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered));
 }
 
-export function getComponentById(id: string): SavedComponent | null {
+export function getComponentById(id) {
   const savedComponents = getSavedComponents();
   return savedComponents.find(comp => comp.id === id) || null;
 }

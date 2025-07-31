@@ -1,20 +1,19 @@
 import { useState } from 'react';
 import { Trash2, Code, Search } from 'lucide-react';
-import { getSavedComponents, deleteComponent } from '../../utils/localStorage';
-import type { SavedComponent } from '../../types/components';
+import { getSavedComponents, deleteComponent } from '../../utils/localStorage.js';
 import './MyComponentsView.css';
 
 export function MyComponentsView() {
-  const [components, setComponents] = useState<SavedComponent[]>(getSavedComponents());
+  const [components, setComponents] = useState(getSavedComponents());
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedComponent, setSelectedComponent] = useState<SavedComponent | null>(null);
+  const [selectedComponent, setSelectedComponent] = useState(null);
 
   const filteredComponents = components.filter(comp =>
     comp.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     comp.description.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleDelete = (id: string) => {
+  const handleDelete = (id) => {
     if (window.confirm('Are you sure you want to delete this component?')) {
       deleteComponent(id);
       setComponents(getSavedComponents());
@@ -24,17 +23,6 @@ export function MyComponentsView() {
     }
   };
 
-  const handleExport = (component: SavedComponent) => {
-    const dataStr = JSON.stringify(component, null, 2);
-    const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-    
-    const exportFileDefaultName = `${component.name.replace(/\s+/g, '-').toLowerCase()}.json`;
-    
-    const linkElement = document.createElement('a');
-    linkElement.setAttribute('href', dataUri);
-    linkElement.setAttribute('download', exportFileDefaultName);
-    linkElement.click();
-  };
 
   return (
     <div className="my-components-view">
@@ -70,9 +58,6 @@ export function MyComponentsView() {
                 <div className="component-info">
                   <h4>{comp.name}</h4>
                   <p>{comp.description}</p>
-                  <span className="component-date">
-                    {new Date(comp.createdAt).toLocaleDateString()}
-                  </span>
                 </div>
                 <button
                   className="delete-btn"
@@ -101,12 +86,6 @@ export function MyComponentsView() {
                   >
                     <Code size={16} />
                     Copy Code
-                  </button>
-                  <button
-                    className="btn btn-primary"
-                    onClick={() => handleExport(selectedComponent)}
-                  >
-                    Export
                   </button>
                 </div>
               </div>

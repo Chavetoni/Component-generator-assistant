@@ -1,10 +1,11 @@
 .header {
-  background-color: #1e293b;
-  color: white;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
   position: sticky;
   top: 0;
   z-index: 50;
   box-shadow: var(--shadow-md);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .header-content {
@@ -28,9 +29,9 @@
 }
 
 .header-actions .btn-icon {
-  color: white;
+  color: var(--text-primary);
 }
 
 .header-actions .btn-icon:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--bg-tertiary);
 }
