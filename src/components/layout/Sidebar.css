@@ -1,0 +1,39 @@
+.sidebar {
+  width: 6rem;
+  background-color: var(--bg-primary);
+  border-right: 1px solid var(--border-color);
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.sidebar-btn {
+  width: 4rem;
+  height: 4rem;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  color: var(--text-secondary);
+  border-radius: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.sidebar-btn:hover {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.sidebar-btn.active {
+  background-color: var(--bg-tertiary);
+  color: var(--visa-blue);
+}
+
+.dark .sidebar-btn.active {
+  color: var(--visa-gold);
+}

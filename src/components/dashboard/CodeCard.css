@@ -1,0 +1,130 @@
+.code-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 400px;
+}
+
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.code-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.code-editor-container {
+  background-color: #1e293b;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  height: 100%;
+  min-height: 300px;
+}
+
+.code-editor {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  color: #e2e8f0;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  resize: none;
+  outline: none;
+}
+
+.components-list {
+  padding: 1rem;
+  background-color: var(--bg-tertiary);
+  border-radius: 0.5rem;
+  min-height: 300px;
+}
+
+.component-info {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: var(--bg-primary);
+  border-radius: 0.5rem;
+  border-left: 4px solid var(--visa-blue);
+}
+
+.component-info:last-child {
+  margin-bottom: 0;
+}
+
+.component-info h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  color: var(--visa-blue);
+}
+
+.dark .component-info h4 {
+  color: var(--visa-gold);
+}
+
+.component-info p {
+  margin: 0.25rem 0;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.component-info strong {
+  color: var(--text-primary);
+}
+
+.tree-container {
+  padding: 1rem;
+  background-color: var(--bg-tertiary);
+  border-radius: 0.5rem;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.875rem;
+  min-height: 300px;
+}
+
+.component-tree {
+  line-height: 1.8;
+}
+
+.tree-node {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.tree-child {
+  margin-left: 1.5rem;
+  position: relative;
+}
+
+.tree-child::before {
+  content: '├─';
+  position: absolute;
+  left: -1rem;
+  color: var(--text-secondary);
+}
+
+.tree-child:last-child::before {
+  content: '└─';
+}
+
+.tree-icon {
+  margin-right: 0.5rem;
+}
+
+.empty-state {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 2rem;
+}
+
+.tabs {
+  flex: 1;
+}
+
+.tab-content {
+  height: 100%;
+}
