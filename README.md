@@ -6,7 +6,7 @@ This project is an interactive prototype of a "Natural Language to Component Sug
 https://chavetoni.github.io/Component-generator-assistant/
 
 
-## Your Approach and Technical Choices
+## Approach and Technical Choices
 
 My approach was to create an loosely agentic expirience and conversational UI that feels like a collaborative partner rather than a static tool. The main vision for this application was to create a environment and system that would benefit a developer.  I envisioned myself as if i were to use the tool on a daily basis and noted things that would help me or hinder me in my workflow.
 
@@ -21,7 +21,7 @@ My approach was to create an loosely agentic expirience and conversational UI th
 **Three-View Application Structure**: The UI is structured into three distinct areas: Dashboard (Conversation + Live Preview + Code Output), Component Library Browser, and My Components Manager. This layout provides the developer to have clear workflow from their request, visual results, and code ouput while also allowing them to discover and manage their own buit components.
 
 
-## Any Assumptions or Shortcuts You Made
+## Assumptions and Shortcuts Made
 
 To deliver a polished, production-ready prototype, I made several key assumptions and shortcuts:
 
@@ -35,7 +35,7 @@ To deliver a polished, production-ready prototype, I made several key assumption
 
 **Predefined Component Patterns**: The application recognizes specific keywords and generates a curated set of components (login forms, profile cards, button groups, etc.). I chose this to demonstrates the core concept of the workflow without creating too much complexity.
 
-## What You Would Improve or Add with More Time
+## Things To Improve or Add with More Time
 
 With more time, I would focus on enhancing the intelligence and expanding the capabilities to make it a truly a agentic development asistant.
 
@@ -49,7 +49,7 @@ With more time, I would focus on enhancing the intelligence and expanding the ca
 
 ## Other Notes ##
 
-**AI tools use**: For full closure, I used AI tools (Gemini & Claude) to assist with researching, brainstorming, and generating complex code snippets. AI was use as a lecturer and partner instead of a replacement.
+**AI Tools Use**: For full closure, I used AI tools (Gemini & Claude) to assist with researching, brainstorming, and generating complex code snippets. AI was use as a lecturer and partner instead of a replacement.
 
 ## Development
 
