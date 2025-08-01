@@ -3,6 +3,7 @@
 This project is an interactive prototype of a "Natural Language to Component Suggestion Tool," as assigned. The concept is a web application where a developer can describe a UI component in plain English and receive a generated code snippet and a live preview in real-time.  The application has included features where they could access a componet library with pre-built components from Visa's documentation page, allowing the dev to use them as a starting point if needed.  The application also has a saved component feature where the developer can save a component they worked and have it stored for later use.  
 
 ## 🚀 Live Demo
+https://chavetoni.github.io/Component-generator-assistant/
 
 
 ## Your Approach and Technical Choices
