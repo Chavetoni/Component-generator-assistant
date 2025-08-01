@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Trash2, Code, Search } from 'lucide-react';
-import { getSavedComponents, deleteComponent } from '../../utils/localStorage.js';
-import './MyComponentsView.css';
+import { getSavedComponents, deleteComponent } from '../../services/localStorage.js';
+import './MyComponents.css';
 
-export function MyComponentsView() {
+export default function MyComponents() {
   const [components, setComponents] = useState(getSavedComponents());
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedComponent, setSelectedComponent] = useState(null);

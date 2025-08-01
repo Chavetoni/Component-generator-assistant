@@ -1,7 +1,7 @@
 import { LayoutDashboard, Library, Star } from 'lucide-react';
 import './Sidebar.css';
 
-export function Sidebar({ activeView, onViewChange }) {
+export default function Sidebar({ activeView, onViewChange }) {
   const navItems = [
     { id: 'dashboard', icon: LayoutDashboard, label: 'Dashboard' },
     { id: 'components', icon: Library, label: 'View Components' },

@@ -4,7 +4,6 @@ import { authenticVisaComponents } from '../data/authenticVisaComponents.js';
 export function matchPattern(input) {
   const normalizedInput = input.toLowerCase().trim();
   
-  // First check for authentic Visa component matches
   const visaPatterns = {
     'visa-button-primary': ['primary button', 'main button', 'action button'],
     'visa-button-secondary': ['secondary button', 'outline button'],
@@ -32,7 +31,6 @@ export function matchPattern(input) {
     'visa-contact-form': ['contact form', 'contact us', 'feedback form']
   };
 
-  // Check for authentic Visa component matches first
   for (const [componentId, keywords] of Object.entries(visaPatterns)) {
     if (keywords.some(keyword => normalizedInput.includes(keyword))) {
       const component = authenticVisaComponents.find(c => c.id === componentId);
@@ -46,7 +44,6 @@ export function matchPattern(input) {
     }
   }
 
-  // Fallback to original pattern matching
   const patterns = {
     login: ['login', 'signin', 'sign in', 'authenticate', 'auth form'],
     navigation: ['nav', 'menu', 'navigation', 'navbar', 'sidebar'],
@@ -68,12 +65,10 @@ export function matchPattern(input) {
     }
   }
 
-  // Form-related patterns
   if (normalizedInput.includes('form') || normalizedInput.includes('input')) {
     if (normalizedInput.includes('login') || normalizedInput.includes('sign')) {
       return componentDatabase.login;
     }
-    // Return a generic form pattern
     return {
       components: [
         { name: 'FormContainer', purpose: 'Form wrapper', props: 'onSubmit, children' },
@@ -88,7 +83,6 @@ function CustomForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission
   };
 
   return (

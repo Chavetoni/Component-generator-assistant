@@ -1,43 +1,33 @@
 import { useState } from 'react';
-import { Header } from './components/layout/Header';
-import { Sidebar } from './components/layout/Sidebar';
-import { MainContent } from './components/layout/MainContent';
-import { DashboardView } from './components/views/DashboardView';
-import { ComponentLibraryView } from './components/views/ComponentLibraryView';
-import { MyComponentsView } from './components/views/MyComponentsView';
+import AppLayout from './layouts/AppLayout';
+import Dashboard from './pages/Dashboard';
+import ComponentLibrary from './pages/ComponentLibrary';
+import MyComponents from './pages/MyComponents';
 import './App.css';
 import './styles/visaComponents.css';
 
 function App() {
-  const [activeView, setActiveView] = useState('dashboard');
   const [selectedComponent, setSelectedComponent] = useState(null);
 
-  const renderView = () => {
+  const renderView = (activeView) => {
     switch (activeView) {
       case 'dashboard':
-        return <DashboardView selectedComponent={selectedComponent} />;
+        return <Dashboard selectedComponent={selectedComponent} />;
       case 'components':
-        return <ComponentLibraryView onUseComponent={(component) => {
+        return <ComponentLibrary onUseComponent={(component) => {
           setSelectedComponent({ code: component.code, preview: component.preview });
-          setActiveView('dashboard');
         }} />;
       case 'my-components':
-        return <MyComponentsView />;
+        return <MyComponents />;
       default:
-        return <DashboardView />;
+        return <Dashboard selectedComponent={selectedComponent} />;
     }
   };
 
   return (
-    <div className="app">
-      <Header />
-      <div className="app-body">
-        <Sidebar activeView={activeView} onViewChange={setActiveView} />
-        <MainContent>
-          {renderView()}
-        </MainContent>
-      </div>
-    </div>
+    <AppLayout>
+      {renderView}
+    </AppLayout>
   );
 }
 

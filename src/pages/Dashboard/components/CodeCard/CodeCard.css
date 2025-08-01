@@ -50,32 +50,6 @@
   overflow: hidden;
 }
 
-.code-editor-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid var(--border-color);
-  background-color: var(--bg-tertiary);
-  border-radius: 0.5rem 0.5rem 0 0;
-}
-
-.file-icon {
-  margin-right: 0.5rem;
-}
-
-.file-name {
-  color: var(--text-primary);
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-.code-stats {
-  display: flex;
-  gap: 1rem;
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-}
 
 .code-editor {
   flex: 1;

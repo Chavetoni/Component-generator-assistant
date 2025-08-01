@@ -1,9 +1,8 @@
-import { Card } from '../ui/Card';
+import { Card } from '../../../../components/ui/Card';
 import './PreviewCard.css';
 
-export function PreviewCard({ preview, code }) {
+export default function PreviewCard({ preview, code }) {
   const renderPreview = () => {
-    // If we have code, render it directly with Visa styles
     if (code && code.trim()) {
       return (
         <div className="preview-content">

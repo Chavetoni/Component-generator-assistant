@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Copy, Check } from 'lucide-react';
-import { Card } from '../ui/Card';
-import { Tabs } from '../ui/Tabs';
-import { Button } from '../ui/Button';
+import { Card } from '../../../../components/ui/Card';
+import { Tabs } from '../../../../components/ui/Tabs';
+import { Button } from '../../../../components/ui/Button';
 import './CodeCard.css';
 
-export function CodeCard({ code, componentInfo, onSave }) {
+export default function CodeCard({ code, componentInfo, onSave }) {
   const [copied, setCopied] = useState(false);
   const [editedCode, setEditedCode] = useState(code);
 
@@ -67,19 +67,11 @@ export function CodeCard({ code, componentInfo, onSave }) {
       label: 'Code Editor',
       content: (
         <div className="code-editor-container">
-          <div className="code-editor-header">
-            <span className="file-icon">📄</span>
-            <span className="file-name">component.html</span>
-            <div className="code-stats">
-              <span className="line-count">{editedCode.split('\n').length} lines</span>
-              <span className="char-count">{editedCode.length} chars</span>
-            </div>
-          </div>
           <textarea
             className="code-editor"
             value={editedCode}
             onChange={(e) => setEditedCode(e.target.value)}
-            placeholder="<!-- Your generated Visa component code will appear here -->"
+            placeholder="Your generated component code will appear here..."
             spellCheck={false}
           />
         </div>

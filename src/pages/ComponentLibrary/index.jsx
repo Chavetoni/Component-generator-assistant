@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { Search } from 'lucide-react';
-import { authenticVisaComponents } from '../../data/authenticVisaComponents.js';
-import './ComponentLibraryView.css';
+import { authenticVisaComponents } from '../../services/authenticVisaComponents.js';
+import './ComponentLibrary.css';
 
-export function ComponentLibraryView({ onUseComponent }) {
+export default function ComponentLibrary({ onUseComponent }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
 

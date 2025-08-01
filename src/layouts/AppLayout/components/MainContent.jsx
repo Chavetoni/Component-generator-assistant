@@ -1,7 +1,6 @@
-import React from 'react';
 import './MainContent.css';
 
-export function MainContent({ children }) {
+export default function MainContent({ children }) {
   return (
     <main className="main-content">
       {children}

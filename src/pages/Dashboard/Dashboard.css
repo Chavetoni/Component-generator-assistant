@@ -1,21 +1,20 @@
 .dashboard-view {
   height: 100%;
-  overflow: hidden;
+  overflow-y: auto;
   padding: 1.5rem;
 }
 
 .dashboard-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: minmax(600px, auto) minmax(500px, auto);
   gap: 1.5rem;
-  height: calc(100vh - 7rem); /* Account for header and padding */
-  max-height: calc(100vh - 7rem);
+  min-height: calc(100vh - 7rem);
 }
 
 .dashboard-grid > :nth-child(3) {
   grid-column: 1 / -1;
-  overflow: hidden;
+  min-height: 550px;
 }
 
 @media (max-width: 1024px) {

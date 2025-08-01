@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Send } from 'lucide-react';
-import { Card } from '../ui/Card';
-import { Button } from '../ui/Button';
+import { Card } from '../../../../components/ui/Card';
+import { Button } from '../../../../components/ui/Button';
 import './ChatCard.css';
 
-export function ChatCard({ messages, onSendMessage, onReset }) {
+export default function ChatCard({ messages, onSendMessage, onReset }) {
   const [input, setInput] = useState('');
   const messagesEndRef = useRef(null);
 
@@ -29,7 +29,6 @@ export function ChatCard({ messages, onSendMessage, onReset }) {
       return <p className="typing-indicator">{message.content}</p>;
     }
 
-    // Parse modification actions from message
     const modificationRegex = /Available modifications: (.+)$/;
     const match = message.content.match(modificationRegex);
     
@@ -70,7 +69,7 @@ export function ChatCard({ messages, onSendMessage, onReset }) {
   return (
     <Card className="chat-card">
       <div className="chat-header">
-        <h3>Chat & Build Components</h3>
+        <h3>Chat Box</h3>
         <button className="reset-btn" onClick={onReset}>
           Reset
         </button>
@@ -83,7 +82,7 @@ export function ChatCard({ messages, onSendMessage, onReset }) {
             className={`message ${message.sender}`}
           >
             <div className="message-sender">
-              {message.sender === 'user' ? 'You' : 'NOVA Assistant'}
+              {message.sender === 'user' ? 'You' : 'Component Generator Assistant'}
             </div>
             {renderMessageContent(message)}
           </div>

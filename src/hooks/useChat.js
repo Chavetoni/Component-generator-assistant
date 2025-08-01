@@ -5,7 +5,7 @@ export function useChat() {
   const [messages, setMessages] = useState([
     {
       id: '1',
-      content: 'Build components with natural language. Click the Instruction button to know how to use.  \n\n**Available components:**\n• "login form" - basic login with email/password\n• "contact form" - name, email, message fields\n• "button group" - multiple action buttons\n• "card layout" - content card with text\n• "profile card" - user profile with avatar\n\n**Example requests:**\n• "login form with remember me"\n• "contact form with phone field"\n• "profile card with status and actions"\n• "button group with large buttons"\n\n**Use suggested add on features as you go:** "add login", "add forgot password", etc.',
+      content: 'Build components with natural language. Click the **Help** button for more information on how to use.  \n\n**Available components:**\n• "login form" - basic login with email/password\n• "contact form" - name, email, message fields\n• "button group" - multiple action buttons\n• "card layout" - content card with text\n• "profile card" - user profile with avatar\n\n**Example requests:**\n• "login form with remember me"\n• "contact form with phone field"\n• "profile card with status and actions"\n• "button group with large buttons"\n\n**Use suggested add on features as you go:** "add login", "add forgot password", etc.',
       sender: 'assistant',
       timestamp: new Date()
     }
@@ -19,7 +19,6 @@ export function useChat() {
   const [previewUpdateKey, setPreviewUpdateKey] = useState(0);
 
   const sendMessage = useCallback((content) => {
-    // Add user message
     const userMessage = {
       id: Date.now().toString(),
       content,
@@ -28,7 +27,6 @@ export function useChat() {
     };
     setMessages(prev => [...prev, userMessage]);
 
-    // Add typing indicator
     const typingMessage = {
       id: Date.now().toString() + '_typing',
       content: 'Analyzing your request...',
@@ -38,16 +36,12 @@ export function useChat() {
     };
     setMessages(prev => [...prev, typingMessage]);
 
-    // Simulate processing delay
     setTimeout(() => {
-      // Remove typing indicator
       setMessages(prev => prev.filter(msg => msg.id !== typingMessage.id));
 
-      // Check if this is a modification request
       if (currentExample) {
         const normalizedContent = content.toLowerCase().trim();
         
-        // Check for modification patterns
         const isModificationRequest = 
           content.startsWith('+') ||
           normalizedContent.startsWith('add ') ||
@@ -61,15 +55,12 @@ export function useChat() {
           });
         
         if (isModificationRequest) {
-          // Find matching modification
           let modification = null;
           
-          // First try exact match with '+' prefix
           if (content.startsWith('+')) {
             modification = currentExample.modifications.find(mod => mod.name === content.trim());
           }
           
-          // If no exact match, try fuzzy matching
           if (!modification) {
             modification = currentExample.modifications.find(mod => {
               const modName = mod.name.toLowerCase().replace('+ ', '').replace('add ', '');
@@ -94,7 +85,6 @@ export function useChat() {
             setCurrentCode(newCode);
             setAppliedModifications(prev => [...prev, modification.id]);
             
-            // Update component info with additional components from modification
             const getComponentsFromModification = (modificationId) => {
               switch (modificationId) {
                 case 'add-remember-me':
@@ -140,7 +130,6 @@ export function useChat() {
               components: [...prev.components, ...newComponents]
             }));
             
-            // Force preview update - clear preview so code takes precedence
             setCurrentPreview('');
             setPreviewUpdateKey(prev => prev + 1);
             
@@ -153,7 +142,6 @@ export function useChat() {
             setMessages(prev => [...prev, assistantMessage]);
             return;
           } else {
-            // Handle case where modification wasn't found or already applied
             const availableModifications = currentExample.modifications
               .filter(mod => !appliedModifications.includes(mod.id))
               .map(mod => mod.name)
@@ -178,7 +166,6 @@ export function useChat() {
         }
       }
       
-      // Process new component request
       const example = findMatchingExample(content);
       
       if (example) {
@@ -187,10 +174,8 @@ export function useChat() {
         let appliedMods = [];
         let autoAppliedModNames = [];
         
-        // Auto-detect and apply modifications from the user prompt
         const normalizedInput = content.toLowerCase().trim();
         const autoModifications = example.modifications.filter(mod => {
-          // Check if modification keywords are in the user input
           const modKeywords = [
             { keywords: ['status', 'online', 'offline', 'badge'], modId: 'add-status-badge' },
             { keywords: ['actions', 'action', 'buttons', 'message', 'call'], modId: 'add-action-buttons' },
@@ -210,7 +195,6 @@ export function useChat() {
           return matchingKeyword !== undefined;
         });
         
-        // Apply auto-detected modifications
         autoModifications.forEach(mod => {
           finalCode = mod.codeTransform(finalCode);
           appliedMods.push(mod.id);
@@ -218,11 +202,10 @@ export function useChat() {
         });
         
         setCurrentCode(finalCode);
-        setCurrentPreview(''); // Clear preview so code takes precedence
+        setCurrentPreview('');
         setAppliedModifications(appliedMods);
         setPreviewUpdateKey(prev => prev + 1);
         
-        // Initialize component info with base components
         const getBaseComponents = (exampleId) => {
           switch (exampleId) {
             case 'login-form':
@@ -240,7 +223,6 @@ export function useChat() {
           }
         };
         
-        // Add components from auto-applied modifications
         let allComponents = getBaseComponents(example.id);
         autoModifications.forEach(mod => {
           const getComponentsFromModification = (modificationId) => {
@@ -355,22 +337,19 @@ export function useChat() {
   const findMatchingExample = (input) => {
     const normalizedInput = input.toLowerCase().trim();
     
-    // Simple typo correction for common words
     const correctedInput = normalizedInput
       .replace(/profle/g, 'profile')
       .replace(/logn/g, 'login')
       .replace(/contct/g, 'contact')
       .replace(/buton/g, 'button');
     
-    // Score each example based on keyword matches
     const scores = workingExamples.map(example => {
       let score = 0;
       let exactMatches = 0;
       
       for (const keyword of example.keywords) {
-        // Exact phrase match (highest priority)
         if (correctedInput.includes(keyword)) {
-          score += keyword.length * 3; // Weight by keyword length
+          score += keyword.length * 3;
           exactMatches++;
         }
       }
@@ -378,7 +357,6 @@ export function useChat() {
       return { example, score, exactMatches };
     });
     
-    // Sort by score (descending) and return the best match
     scores.sort((a, b) => {
       if (a.exactMatches !== b.exactMatches) {
         return b.exactMatches - a.exactMatches;
@@ -386,7 +364,6 @@ export function useChat() {
       return b.score - a.score;
     });
     
-    // Return the best match if it has any exact matches
     return scores[0].exactMatches > 0 ? scores[0].example : null;
   };
 
