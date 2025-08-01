@@ -29,7 +29,7 @@ export function HelpModal({ isOpen, onClose }) {
           <ul>
             <li>This is a <strong>prototype</strong> with hardcoded patterns</li>
             <li>Components are <strong>static previews</strong>, not interactive</li>
-            <li>Saved components <strong>persist only during session</strong></li>
+            <li>Saved components <strong>exists only during session</strong></li>
             <li><strong>Some prompts work better than others</strong>, be specific with few words</li>
           </ul>
         </section>

@@ -3,7 +3,6 @@ import AppLayout from './layouts/AppLayout';
 import Dashboard from './pages/Dashboard';
 import ComponentLibrary from './pages/ComponentLibrary';
 import MyComponents from './pages/MyComponents';
-import './App.css';
 import './styles/visaComponents.css';
 
 function App() {

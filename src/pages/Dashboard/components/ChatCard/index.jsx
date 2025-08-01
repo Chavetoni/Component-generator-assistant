@@ -38,7 +38,7 @@ export default function ChatCard({ messages, onSendMessage, onReset }) {
       
       return (
         <>
-          <div dangerouslySetInnerHTML={{ __html: formatMessage(mainContent) }} />
+          <MessageText content={mainContent} />
           <div className="modification-actions">
             <div className="actions-label">Try these modifications:</div>
             <div className="quick-actions">
@@ -57,13 +57,25 @@ export default function ChatCard({ messages, onSendMessage, onReset }) {
       );
     }
 
-    return <div dangerouslySetInnerHTML={{ __html: formatMessage(message.content) }} />;
+    return <MessageText content={message.content} />;
   };
 
-  const formatMessage = (content) => {
-    return content
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\n/g, '<br />');
+  const MessageText = ({ content }) => {
+    const parts = content.split(/\*\*(.*?)\*\*|\n/g);
+    
+    return (
+      <div>
+        {parts.map((part, index) => {
+          if (index % 2 === 1 && content.includes(`**${part}**`)) {
+            return <strong key={index}>{part}</strong>;
+          }
+          if (part === '') {
+            return <br key={index} />;
+          }
+          return <React.Fragment key={index}>{part}</React.Fragment>;
+        })}
+      </div>
+    );
   };
 
   return (

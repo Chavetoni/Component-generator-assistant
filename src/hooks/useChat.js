@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { workingExamples } from '../data/workingExamples.js';
+import { workingExamples } from '../services/workingExamples.js';
 
 export function useChat() {
   const [messages, setMessages] = useState([
@@ -135,7 +135,7 @@ export function useChat() {
             
             const assistantMessage = {
               id: Date.now().toString(),
-              content: ` Applied modification: **${modification.name}**\n\n${modification.description}\n\nThe code has been updated in the editor. Check out the preview to see the changes!`,
+              content: ` Applied modification: **${modification.name}**\n\n${modification.description}\n\nThe code has been updated in the editor. Please check the preview.`,
               sender: 'assistant',
               timestamp: new Date()
             };

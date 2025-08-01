@@ -1,12 +1,20 @@
 import { Card } from '../../../../components/ui/Card';
+import DOMPurify from 'dompurify';
 import './PreviewCard.css';
 
 export default function PreviewCard({ preview, code }) {
   const renderPreview = () => {
     if (code && code.trim()) {
+      const sanitizedHTML = DOMPurify.sanitize(code, {
+        ALLOWED_TAGS: ['div', 'span', 'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'br', 'strong', 'em', 'b', 'i', 'ul', 'ol', 'li', 'form', 'input', 'button', 'label', 'select', 'option', 'textarea', 'fieldset', 'legend', 'table', 'thead', 'tbody', 'tr', 'td', 'th', 'nav', 'a', 'img', 'section', 'article', 'header', 'footer', 'aside', 'main'],
+        ALLOWED_ATTR: ['class', 'id', 'type', 'name', 'value', 'placeholder', 'for', 'href', 'src', 'alt', 'title', 'role', 'aria-label', 'tabindex'],
+        FORBID_TAGS: ['script', 'object', 'embed', 'link', 'style', 'meta'],
+        FORBID_ATTR: ['onload', 'onerror', 'onclick', 'onmouseover', 'onfocus', 'onblur', 'onchange', 'onsubmit']
+      });
+      
       return (
         <div className="preview-content">
-          <div className="dynamic-preview" dangerouslySetInnerHTML={{ __html: code }} />
+          <div className="dynamic-preview" dangerouslySetInnerHTML={{ __html: sanitizedHTML }} />
         </div>
       );
     }

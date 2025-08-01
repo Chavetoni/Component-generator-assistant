@@ -58,6 +58,24 @@
   overflow-wrap: break-word;
 }
 
+.preview-notice {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-secondary);
+  background-color: var(--bg-secondary);
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-color);
+}
+
+.preview-notice p {
+  margin: 0.5rem 0;
+}
+
+.preview-notice p:first-child {
+  font-weight: 600;
+  color: var(--text-warning, #f59e0b);
+}
+
 /* Ensure Visa styles work in dynamic preview */
 .dynamic-preview .v-form {
   max-width: 100%;
