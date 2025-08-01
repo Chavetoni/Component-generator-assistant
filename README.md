@@ -3,7 +3,7 @@
 This project is an interactive prototype of a "Natural Language to Component Suggestion Tool," as assigned. The concept is a web application where a developer can describe a UI component in plain English and receive a generated code snippet and a live preview in real-time.  The application has included features where they could access a componet library with pre-built components from Visa's documentation page, allowing the dev to use them as a starting point if needed.  The application also has a saved component feature where the developer can save a component they worked and have it stored for later use.  
 
 ## 🚀 Live Demo
-[Deploy link will be added here]
+
 
 ## Your Approach and Technical Choices
 
@@ -46,7 +46,7 @@ With more time, I would focus on enhancing the intelligence and expanding the ca
 
 **Beyond just single component generation**: I would expand the system to handle more complex workflows, such as generating entire pages or multi-component layouts based on user requests.
 
-## 🛠️ Development
+## Development
 
 ```bash
 npm install
