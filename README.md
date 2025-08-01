@@ -47,6 +47,10 @@ With more time, I would focus on enhancing the intelligence and expanding the ca
 
 **Beyond just single component generation**: I would expand the system to handle more complex workflows, such as generating entire pages or multi-component layouts based on user requests.
 
+## Other Notes ##
+
+**AI tools use**: For full closure, I used AI tools (Gemini & Claude) to assist with researching, brainstorming, and generating complex code snippets. AI was use as a lecturer and partner instead of a replacement.
+
 ## Development
 
 ```bash
